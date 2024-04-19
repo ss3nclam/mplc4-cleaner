@@ -6,8 +6,8 @@ from sys import exit
 from time import sleep
 
 
-MAX_LOGS_COUNT: int = 5
-SLEEP_TIME: int = 3600
+MAX_LOGS_COUNT: int = 10
+SLEEP_TIME: int = 3600  # ms
 LOGS_DIR: str = '/opt/mplc4/log'
 
 logging.basicConfig(filename=f'{LOGS_DIR}/cleaner_logs.txt', format='%(asctime)s:%(levelname)s: %(message)s', level=logging.DEBUG)
