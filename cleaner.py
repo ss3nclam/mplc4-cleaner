@@ -7,14 +7,14 @@ from time import sleep
 
 
 MAX_LOGS_COUNT: int = 10
-SLEEP_TIME: int = 3600  # ms
-LOGS_DIR: str = '/opt/mplc4/log'
+SLEEP_TIME: int = 3600  # s
+_LOGS_DIR: str = '/opt/mplc4/log'
 
-logging.basicConfig(filename=f'{LOGS_DIR}/cleaner_logs.txt', format='%(asctime)s:%(levelname)s: %(message)s', level=logging.DEBUG)
+logging.basicConfig(filename=f'{_LOGS_DIR}/cleaner_logs.txt', format='%(asctime)s:%(levelname)s: %(message)s', level=logging.DEBUG)
 
 
 def get_logs_list() -> tuple:
-    return tuple(filename for filename in os.listdir(LOGS_DIR) if 'mplc.core' in filename)
+    return tuple(filename for filename in os.listdir(_LOGS_DIR) if 'mplc.core' in filename)
 
 
 def main() -> None:
@@ -24,7 +24,7 @@ def main() -> None:
         
         if len(logs_before_cleaning) >= MAX_LOGS_COUNT:
             logging.info(f'превышен лимит логов, запуск очистки..')
-            os.system(f'rm -rf {LOGS_DIR}/*mplc.core*')
+            os.system(f'rm -rf {_LOGS_DIR}/*mplc.core*')
 
             if logs_before_cleaning == get_logs_list():
                 raise SystemError('очистка не произведена')
