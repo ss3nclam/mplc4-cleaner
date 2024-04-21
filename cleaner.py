@@ -42,11 +42,11 @@ def main() -> None:
         exit()
         
 
-def scheduler(sleep_time: int = SLEEP_TIME):
+def scheduler(periodicity: int = SLEEP_TIME):
     while True:
         main()
         logging.info(f'запуск сна..')
-        sleep(sleep_time)
+        sleep(periodicity)
 
     
 if __name__ == '__main__':
