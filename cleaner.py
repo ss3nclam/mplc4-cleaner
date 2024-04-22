@@ -8,6 +8,7 @@ import sys
 
 
 MAX_LOGS_COUNT: int = 10
+MAX_DIR_SIZE: float = 10.0 # TODO Написать метод проверки лимита занимаемой памяти
 SLEEP_TIME: int = 1800  # sec
 
 _CLEANER_SCRIPT_FILENAME: str = __file__.split('/')[-1]
