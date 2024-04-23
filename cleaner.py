@@ -13,6 +13,7 @@ from modules._settings import logging_config
 
 logs_manager = MPLC4LogsManager()
 
+print(logs_manager.get_logs('used'))
 print(System.get_diskspace_usage())
 logs_manager.remove('unused')
 print(System.get_diskspace_usage())

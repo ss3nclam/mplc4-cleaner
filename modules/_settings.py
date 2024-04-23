@@ -12,7 +12,7 @@ try:
     config.read(f'{PROJECT_PATH}/config.conf')
 
     logging_config = logging.basicConfig(
-        filename = f'{PROJECT_PATH}/logs.txt' if config.getboolean('app', 'logfile') else None,
+        filename = f'{PROJECT_PATH}/cleaner.log' if config.getboolean('app', 'logfile') else None,
         format = '%(asctime)s:%(levelname)s:%(message)s',
         level = {
             'info': logging.INFO,
