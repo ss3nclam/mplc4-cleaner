@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from ._settings import _IGNORED_FILES, _MPLC4_LOG_DIR
+from ._settings import IGNORED_FILES, MPLC4_LOG_DIR
 from .system import System
 
 
@@ -17,7 +17,7 @@ class MPLC4LogFile(object):
 
 
     def isused(self) -> bool:
-        cmd: str = f'sudo lsof {_MPLC4_LOG_DIR}/{self.name}'
+        cmd: str = f'sudo lsof {MPLC4_LOG_DIR}/{self.name}'
         shell = System.run_cmd(cmd)
 
         try:
@@ -34,4 +34,4 @@ class MPLC4LogFile(object):
 
 
     def isignored(self) -> bool:
-        return self.name in _IGNORED_FILES
+        return self.name in IGNORED_FILES
