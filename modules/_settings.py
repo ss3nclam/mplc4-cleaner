@@ -15,9 +15,9 @@ try:
         filename = f'{project_path}/logs.txt' if config.getboolean('app', 'logfile') else None,
         format = '%(asctime)s:%(levelname)s:%(message)s',
         level = {
-            'INFO': logging.DEBUG,
-            'WARNING': logging.DEBUG,
-            'ERROR': logging.DEBUG,
+            'INFO': logging.INFO,
+            'WARNING': logging.WARNING,
+            'ERROR': logging.ERROR,
             'DEBUG': logging.DEBUG,
             }.get(config['app']['loging_level'], 'DEBUG')
         )
