@@ -1,19 +1,10 @@
 #!/bin/python3
 
-# from modules import SystemService
-# from modules import MPLC4LogFile
-from src import MPLC4LogsManager, System
+from src import MPLC4LogFile, MPLC4LogsManager, System, SystemService, Scheduler
 from src.config import logging_config
 
-
-# mplc4 = SystemService('mplc4')
-# mplc4.restart()
-# print(mplc4.isactive())
+from src.main import scheduler
 
 
-logs_manager = MPLC4LogsManager()
-
-print(logs_manager.get_logs('used'))
-print(System.get_diskspace_usage())
-logs_manager.remove('unused')
-print(System.get_diskspace_usage())
+if __name__ == "__main__":
+    scheduler.run()

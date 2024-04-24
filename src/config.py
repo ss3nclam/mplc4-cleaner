@@ -27,7 +27,7 @@ try:
     MAX_DISK_USAGE: int = getint('max_disk_usage')
     MAX_LOGS_COUNT: int = getint('max_logs_count')
     INSPECTION_FREQUENCY: int = getint('inspection_frequency')
-    MPLC4_LOG_DIR: str = '/opt/mplc4/log'
+    _MPLC4_LOG_DIR: str = '/opt/mplc4/log'
     IGNORED_FILES: tuple = (
         'start_log.txt'
     )

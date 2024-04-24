@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from .config import MAX_LOGS_COUNT, MPLC4_LOG_DIR
+from .config import MAX_DISK_USAGE, MAX_LOGS_COUNT, _MPLC4_LOG_DIR
 from .mplc4_log_file import MPLC4LogFile
 from .system import System
 
@@ -16,7 +16,7 @@ class MPLC4LogsManager:
     def get_logs(self, which: str) -> tuple:
         try:
             dir_content = tuple(
-                MPLC4LogFile(filename) for filename in os.listdir(MPLC4_LOG_DIR)
+                MPLC4LogFile(filename) for filename in os.listdir(_MPLC4_LOG_DIR)
                 )
             logs = tuple(file for file in dir_content if not file.isignored())
 
@@ -40,8 +40,9 @@ class MPLC4LogsManager:
 
 
     def is_limits_reached(self) -> bool:
-        # TODO Добавить проверку лимита занимаемой физ. памяти
-        return len(self.get_logs()) >= MAX_LOGS_COUNT
+        return \
+            len(self.get_logs('all')) >= MAX_LOGS_COUNT or \
+            System.get_diskspace_usage() >= MAX_DISK_USAGE
 
 
     def remove(self, which: str):
@@ -54,7 +55,7 @@ class MPLC4LogsManager:
 
             logging.info(f'{self.__logs_owner}: удаление файлов ({which}): {files}..')
 
-            file_names: str = ' '.join(f'{MPLC4_LOG_DIR}/{file}' for file in files)
+            file_names: str = ' '.join(f'{_MPLC4_LOG_DIR}/{file}' for file in files)
 
             cmd = f'sudo rm -rf {file_names}'
             shell = System.run_cmd(cmd)
