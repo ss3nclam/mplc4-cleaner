@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from ._settings import MAX_LOGS_COUNT, MPLC4_LOG_DIR
+from .config import MAX_LOGS_COUNT, MPLC4_LOG_DIR
 from .mplc4_log_file import MPLC4LogFile
 from .system import System
 

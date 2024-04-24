@@ -1,10 +1,9 @@
 import logging
-import os
 import sys
 from configparser import ConfigParser
+from os import path
 
-
-PROJECT_PATH: str = os.path.dirname(__file__).rstrip(f'{__name__}/')
+PROJECT_PATH: str = path.split(path.dirname(__file__))[0]
 
 config = ConfigParser()
 
@@ -12,19 +11,22 @@ try:
     config.read(f'{PROJECT_PATH}/config.conf')
 
     logging_config = logging.basicConfig(
-        filename = f'{PROJECT_PATH}/cleaner.log' if config.getboolean('app', 'logfile') else None,
+        filename = f'{PROJECT_PATH}/cleaner.log' if config.getboolean('logging', 'to_file') else None,
         format = '%(asctime)s:%(levelname)s:%(message)s',
         level = {
             'info': logging.INFO,
             'warning': logging.WARNING,
             'error': logging.ERROR,
             'debug': logging.DEBUG,
-            }.get(config['app']['loging_level'].lower(), 'debug')
-        )
+            }.get(config['logging']['level'].lower(), 'debug')
+        ) if \
+            config.getboolean('logging', 'logging') else None
     
-    MAX_DISK_USAGE: int = config.getint('app', 'max_disk_usage')
-    MAX_LOGS_COUNT: int = config.getint('app', 'max_logs_count')
-    INSPECTION_FREQUENCY: int = config.getint('app', 'inspection_frequency')
+    getint = lambda option: config.getint('defaults', option)
+
+    MAX_DISK_USAGE: int = getint('max_disk_usage')
+    MAX_LOGS_COUNT: int = getint('max_logs_count')
+    INSPECTION_FREQUENCY: int = getint('inspection_frequency')
     MPLC4_LOG_DIR: str = '/opt/mplc4/log'
     IGNORED_FILES: tuple = (
         'start_log.txt'

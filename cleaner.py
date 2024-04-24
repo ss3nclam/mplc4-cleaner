@@ -1,9 +1,9 @@
-import os
+#!/bin/python3
 
 # from modules import SystemService
 # from modules import MPLC4LogFile
-from modules import MPLC4LogsManager, System
-from modules._settings import logging_config
+from src import MPLC4LogsManager, System
+from src.config import logging_config
 
 
 # mplc4 = SystemService('mplc4')

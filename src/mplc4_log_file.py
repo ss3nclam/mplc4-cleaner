@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from ._settings import IGNORED_FILES, MPLC4_LOG_DIR
+from .config import IGNORED_FILES, MPLC4_LOG_DIR
 from .system import System
 
 
