@@ -2,7 +2,7 @@ import logging
 import time
 from sys import exit
 
-from .config import INSPECTION_FREQUENCY
+from ..config import INSPECTION_FREQUENCY
 
 
 class Scheduler:

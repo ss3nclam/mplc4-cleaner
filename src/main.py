@@ -1,6 +1,6 @@
-from .system_service import SystemService
-from .mplc4_logs_manager import MPLC4LogsManager
-from .scheduler import Scheduler
+from .modules.system_service import SystemService
+from .modules.mplc4_logs_manager import MPLC4LogsManager
+from .modules.scheduler import Scheduler
 
 scheduler = Scheduler()
 logs_manager = MPLC4LogsManager()

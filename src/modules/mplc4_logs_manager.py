@@ -2,9 +2,9 @@ import logging
 import os
 import sys
 
-from .config import MAX_DISK_USAGE, MAX_LOGS_COUNT, _MPLC4_LOG_DIR
 from .mplc4_log_file import MPLC4LogFile
 from .system import System
+from ..config import MAX_DISK_USAGE, MAX_LOGS_COUNT, _MPLC4_LOG_DIR
 
 
 class MPLC4LogsManager:

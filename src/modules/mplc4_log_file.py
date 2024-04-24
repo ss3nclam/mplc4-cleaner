@@ -1,8 +1,8 @@
 import logging
 import sys
 
-from .config import IGNORED_FILES, _MPLC4_LOG_DIR
 from .system import System
+from ..config import IGNORED_FILES, _MPLC4_LOG_DIR
 
 
 class MPLC4LogFile(object):
