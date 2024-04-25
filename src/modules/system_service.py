@@ -64,7 +64,12 @@ class SystemService(object):
 
                 else:
                     shell_error: str = shell.stderr.strip('\n')
-                    raise SystemError(f'неудачное выполнение команды - {shell_error}')
+                    logging.warning(f'{self.__logs_owner}: не удалось перезапустить - "{shell_error}", попытка принудительного запуска..')
+
+                    self.start()
+
+                    if not self.isactive():
+                        raise SystemError(f'не удалось перезапустить и принудительно запустить')
 
             except Exception as error:
                 logging.error(f'{self.__logs_owner}: ошибка перезапуска: {error}')

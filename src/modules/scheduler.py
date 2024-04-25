@@ -15,9 +15,9 @@ class Scheduler:
 
     def job(self, func) -> None:
         func_name: str = func.__name__
-        logging.info(f'{self.__logs_owner}:{func_name}: работа запланирована')
 
         self.__jobs_list.append((func_name, func))
+        logging.info(f'{self.__logs_owner}:{func_name}: работа запланирована')
 
 
     def run(self) -> None:
@@ -27,6 +27,7 @@ class Scheduler:
 
                     try:
                         job()
+                        logging.info(f'{self.__logs_owner}:{job_name}: завершение')
 
                     except Exception as error:
                         logging.error(f'{self.__logs_owner}:{job_name}: ошибка запуска - {error}')
