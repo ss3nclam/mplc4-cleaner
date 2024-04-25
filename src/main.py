@@ -6,7 +6,7 @@ from .modules.scheduler import Scheduler
 from .modules.system_service import SystemService
 
 
-def cleaner():
+def main():
 
     scheduler = Scheduler()
     logs_manager = MPLC4LogsManager()

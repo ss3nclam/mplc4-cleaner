@@ -51,7 +51,6 @@ class MPLC4LogsManager:
 
             if not files:
                 logging.info(f'{self._logs_owner}: список запрашиваемых файлов ({which}) пуст')
-                
                 return
 
             logging.info(f'{self._logs_owner}: удаление файлов ({which}): {files}..')
@@ -65,13 +64,11 @@ class MPLC4LogsManager:
 
             if not shell.stderr and isremoved:
                 logging.info(f'{self._logs_owner}: файлы успешно удалены')
-
                 return True
 
             elif shell.stderr or not isremoved:
                 shell_error: str = shell.stderr.strip('\n')
                 error: str = shell_error if shell_error else 'файлы не были удалены'
-
                 raise SystemError(f'неудачное выполнение команды - {error}')
 
         except Exception as exception:
