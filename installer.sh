@@ -1,10 +1,8 @@
 #!/usr/bin/bash
 
-chmod 777 /opt/mplc4/log/
-echo $'# For CLEANER_SERVICE_NAME\nroot ALL=(ALL) ALL\nuser ALL=(ALL) NOPASSWD: /bin/systemctl daemon-reload\nuser ALL=(ALL) NOPASSWD: /bin/systemctl * mplc4\nuser ALL=(ALL) NOPASSWD: /bin/systemctl * CLEANER_SERVICE_NAME' >> /etc/sudoers
-# cp cleaner.py /opt/mplc4/log/cleaner.py
+echo $'\n# Setting for mplc4-cleaner\nroot ALL=(ALL) ALL\nuser ALL=(ALL) NOPASSWD: /bin/systemctl daemon-reload\nuser ALL=(ALL) NOPASSWD: /bin/systemctl * mplc4\nuser ALL=(ALL) NOPASSWD: /bin/systemctl * mplc4-cleaner\n' | sudo tee -a /etc/sudoers
 chmod +x /opt/mplc4/log/cleaner.py
-echo $'[Unit]\nDescription=CLEANER_SERVICE_NAME\n\n[Service]\nExecStart=/opt/mplc4/log/cleaner.py\n\n[Install]\nWantedBy=multi-user.target' >> /lib/systemd/system/CLEANER_SERVICE_NAME.service
+echo $'[Unit]\nDescription=mplc4-cleaner\n\n[Service]\nExecStart=/opt/mplc4-cleaner/cleaner.py\n\n[Install]\nWantedBy=multi-user.target\n' | sudo tee -a /lib/systemd/system/mplc4-cleaner.service
 systemctl daemon-reload
-systemctl enable CLEANER_SERVICE_NAME.service
-systemctl start CLEANER_SERVICE_NAME.service
+systemctl enable mplc4-cleaner.service
+systemctl start mplc4-cleaner.service
