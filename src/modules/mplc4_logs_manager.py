@@ -1,10 +1,10 @@
 import logging
-import os
-import sys
+from os import listdir
+from sys import exit
 
+from ..config import _MPLC4_LOG_DIR, MAX_DISK_USAGE, MAX_LOGS_COUNT
 from .mplc4_log_file import MPLC4LogFile
 from .system import System
-from ..config import MAX_DISK_USAGE, MAX_LOGS_COUNT, _MPLC4_LOG_DIR
 
 
 class MPLC4LogsManager:
@@ -16,7 +16,7 @@ class MPLC4LogsManager:
     def get_logs(self, which: str) -> tuple:
         try:
             dir_content = tuple(
-                MPLC4LogFile(filename) for filename in os.listdir(_MPLC4_LOG_DIR)
+                MPLC4LogFile(filename) for filename in listdir(_MPLC4_LOG_DIR)
                 )
             logs = tuple(file for file in dir_content if not file.isignored())
 
@@ -36,7 +36,7 @@ class MPLC4LogsManager:
 
         except Exception as error:
             logging.error(f'{self._logs_owner}: ошибка получения списка файлов: {error}')
-            sys.exit(1)
+            exit(1)
 
 
     def is_limits_reached(self) -> bool:
