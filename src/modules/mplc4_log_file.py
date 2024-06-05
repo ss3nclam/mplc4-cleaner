@@ -1,8 +1,8 @@
 import logging
-import sys
+from sys import exit
 
+from ..config import _MPLC4_LOG_DIR, IGNORED_FILES
 from .system import System
-from ..config import IGNORED_FILES, _MPLC4_LOG_DIR
 
 
 class MPLC4LogFile(object):
@@ -30,7 +30,7 @@ class MPLC4LogFile(object):
 
         except Exception as error:
             logging.error(f'{self.__logs_owner}: ошибка проверки статуса: {error}')
-            sys.exit(1)
+            exit(1)
 
 
     def isignored(self) -> bool:

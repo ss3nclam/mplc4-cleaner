@@ -1,6 +1,6 @@
 import logging
-import time
 from sys import exit
+from time import sleep
 
 from ..config import INSPECTION_FREQUENCY
 
@@ -34,4 +34,4 @@ class Scheduler:
                         exit(1)
 
                 logging.info(f'{self.__logs_owner}: ожидание..')
-                time.sleep(INSPECTION_FREQUENCY)
+                sleep(INSPECTION_FREQUENCY)
