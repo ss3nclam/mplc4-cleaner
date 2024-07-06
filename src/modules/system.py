@@ -9,13 +9,12 @@ class System:
     @staticmethod
     def run_cmd(command: str):
         return subprocess.run(
-            args = command,
-            stdout = subprocess.PIPE,
-            stderr = subprocess.PIPE,
-            shell = True,
-            text = True
-            )
-
+            args=command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True,
+            text=True,
+        )
 
     @staticmethod
     def get_diskspace_usage():
@@ -23,17 +22,19 @@ class System:
 
         try:
             shell = System.run_cmd(cmd)
-            out: str = shell.stdout.rstrip('\%\n')
-            
-            if not out.isdigit() or not int(out) in range(101) or shell.stderr:
-                raise_msg = 'ошибка выполнения команды'
-                shell_error_msg = ': ' + shell.stderr.rstrip('\n')
+            out: str = shell.stdout.rstrip("\%\n")
 
-                raise SystemError(f'{raise_msg}{shell_error_msg}')
-            
+            if not out.isdigit() or not int(out) in range(101) or shell.stderr:
+                raise_msg = "ошибка выполнения команды"
+                shell_error_msg = ": " + shell.stderr.rstrip("\n")
+
+                raise SystemError(f"{raise_msg}{shell_error_msg}")
+
             return int(out)
-            
+
         except Exception as error:
-            logging.warning(f'{System._logs_owner}: не удалось получить данные об использовании носителя: {error}')
+            logging.warning(
+                f"{System._logs_owner}: не удалось получить данные об использовании носителя: {error}"
+            )
 
             return
